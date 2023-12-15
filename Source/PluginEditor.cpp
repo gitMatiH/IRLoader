@@ -17,7 +17,15 @@ IRLoaderAudioProcessorEditor::IRLoaderAudioProcessorEditor (IRLoaderAudioProcess
     loadBtn.setButtonText("Load IR");
     loadBtn.onClick = [this]()
     {
+        fileChooser = std::make_unique<juce::FileChooser>("Choose File",
+                                                           audioProcessor.root,
+                                                           "*");
 
+        const auto fileChooserFlags = juce::FileBrowserComponent::openMode |
+            juce::FileBrowserComponent::canSelectFiles |
+            juce::FileBrowserComponent::canSelectDirectories;
+
+        fileChooser->launch
     };
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
@@ -44,12 +52,12 @@ void IRLoaderAudioProcessorEditor::resized()
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
 
-    const auto btnX = getWidth() * JUCE_LIVE_CONSTANT(0.25);
-    const auto btnY = getHeight() * JUCE_LIVE_CONSTANT(0.25);
-    const auto btnWidth = getWidth() * JUCE_LIVE_CONSTANT(0.1);
+    const auto btnX = getWidth() * 0.35;//JUCE_LIVE_CONSTANT(0.25);
+    const auto btnY = getHeight() * 0.5;//JUCE_LIVE_CONSTANT(0.25);
+    const auto btnWidth = getWidth() * 0.15;//JUCE_LIVE_CONSTANT(0.1);
     const auto btnHeight = btnWidth * 0.8;
 
 
-    loadBtn.setBounds(btnX, btnY, btnWidth, btnHeight);
+    loadBtn.setBounds(btnX, btnY, btnWidth, btnHeight); 
 
 }
